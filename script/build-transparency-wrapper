@@ -1,0 +1,10 @@
+#!/bin/bash
+#
+# Invoke the Atom binary with specific flags.
+#
+# @author Salvatore Garbesi <sal@dolox.com>
+# @module script/build-transparency-wrapper
+#
+
+# Run the Atom binary.
+${BASH_SOURCE}Pristine --enable-transparent-visuals --disable-gpu;

@@ -1,100 +1,86 @@
-![Atom](https://cloud.githubusercontent.com/assets/72919/2874231/3af1db48-d3dd-11e3-98dc-6066f8bc766f.png)
+# Atom w/ Transparency
 
-[![macOS Build Status](https://travis-ci.org/atom/atom.svg?branch=master)](https://travis-ci.org/atom/atom) [![Windows Build Status](https://ci.appveyor.com/api/projects/status/1tkktwh654w07eim?svg=true)](https://ci.appveyor.com/project/Atom/atom)
-[![Dependency Status](https://david-dm.org/atom/atom.svg)](https://david-dm.org/atom/atom)
-[![Join the Atom Community on Slack](http://atom-slack.herokuapp.com/badge.svg)](http://atom-slack.herokuapp.com/)
+This has only been adjusted and tested for Mac OS X.
 
-Atom is a hackable text editor for the 21st century, built on [Electron](https://github.com/atom/electron), and based on everything we love about our favorite editors. We designed it to be deeply customizable, but still approachable using the default configuration.
+## Binary
 
-Visit [atom.io](https://atom.io) to learn more or visit the [Atom forum](https://discuss.atom.io).
+Resides in `./dist/Atom.app`.
 
-Follow [@AtomEditor](https://twitter.com/atomeditor) on Twitter for important
-announcements.
+## Stylesheet
 
-This project adheres to the Contributor Covenant [code of conduct](CODE_OF_CONDUCT.md).
-By participating, you are expected to uphold this code. Please report unacceptable behavior to atom@github.com.
+Add the following CSS to your Atom theme.
 
-## Documentation
+Settings > Themes > Your Stylesheet
 
-If you want to read about using Atom or developing packages in Atom, the [Atom Flight Manual](http://flight-manual.atom.io) is free and available online. You can find the source to the manual in [atom/flight-manual.atom.io](https://github.com/atom/flight-manual.atom.io).
+```css
+html {
+  background: rgba(0, 0, 0, 0.75);
+  padding-top: 28px;
+}
 
-The [API reference](https://atom.io/docs/api) for developing packages is also documented on Atom.io.
+atom-text-editor,
+.footer,
+.footer .status-bar,
+.line-numbers,
+.line-numbers > div,
+.tab-bar,
+.tab-bar .tab.active,
+.tab-bar .tab .title,
+.workspace {
+  background-color: transparent !important;
+}
 
-## Installing
+atom-text-editor::shadow .gutter {
+  background-color: rgba(0, 0, 0, 0.25);
+  border-right: 1px solid rgba(255, 255, 255, 0.25);
+  color: #555;
+  margin-right: 15px;
 
-### Prerequisites
-- [Git](https://git-scm.com/)
+  .line-number {
+    opacity: 1 !important;
 
-### macOS
+    &.cursor-line,
+    &:hover {
+      color: #fff;
+    }
+  }
+}
 
-Download the latest [Atom release](https://github.com/atom/atom/releases/latest).
+.footer {
+  border-top: 1px solid #555;
+}
 
-Atom will automatically update when a new release is available.
+head {
+  display: block;
+}
 
-### Windows
+title {
+  -webkit-user-select: none;
+  color: #888;
+  display: block;
+  position: absolute;
+  text-align: center;
+  top: 10px;
+  width: 100%;
+}
 
-Download the latest [AtomSetup.exe installer](https://github.com/atom/atom/releases/latest).
+html.focus title {
+  color: #ccc;
+}
 
-Atom will automatically update when a new release is available.
+.titlebar-avatar {
+  border-radius: 24px;
+  display: block !important;
+  height: 24px;
+  position: absolute;
+  right: 5px;
+  top: 5px;
+  width: 24px;
+}
+```
 
-You can also download an `atom-windows.zip` file from the [releases page](https://github.com/atom/atom/releases/latest).
-The `.zip` version will not automatically update.
+## Build
 
-Using [chocolatey](https://chocolatey.org/)? Run `cinst Atom` to install
-the latest version of Atom.
-
-### Debian Linux (Ubuntu)
-
-Currently only a 64-bit version is available.
-
-1. Download `atom-amd64.deb` from the [Atom releases page](https://github.com/atom/atom/releases/latest).
-2. Run `sudo dpkg --install atom-amd64.deb` on the downloaded package.
-3. Launch Atom using the installed `atom` command.
-
-The Linux version does not currently automatically update so you will need to
-repeat these steps to upgrade to future releases.
-
-### Red Hat Linux (Fedora 21 and under, CentOS, Red Hat)
-
-Currently only a 64-bit version is available.
-
-1. Download `atom.x86_64.rpm` from the [Atom releases page](https://github.com/atom/atom/releases/latest).
-2. Run `sudo yum localinstall atom.x86_64.rpm` on the downloaded package.
-3. Launch Atom using the installed `atom` command.
-
-The Linux version does not currently automatically update so you will need to
-repeat these steps to upgrade to future releases.
-
-### Fedora 22+
-
-Currently only a 64-bit version is available.
-
-1. Download `atom.x86_64.rpm` from the [Atom releases page](https://github.com/atom/atom/releases/latest).
-2. Run `sudo dnf install ./atom.x86_64.rpm` on the downloaded package.
-3. Launch Atom using the installed `atom` command.
-
-The Linux version does not currently automatically update so you will need to
-repeat these steps to upgrade to future releases.
-
-### Archive extraction
-
-An archive is available for people who don't want to install `atom` as root.
-
-This version enables you to install multiple Atom versions in parallel. It has been built on Ubuntu 64-bit,
-but should be compatible with other Linux distributions.
-
-1. Install dependencies (on Ubuntu): `sudo apt install git gconf2 gconf-service libgtk2.0-0 libudev1 libgcrypt20
-libnotify4 libxtst6 libnss3 python gvfs-bin xdg-utils libcap2`
-2. Download `atom-amd64.tar.gz` from the [Atom releases page](https://github.com/atom/atom/releases/latest).
-3. Run `tar xf atom-amd64.tar.gz` in the directory where you want to extract the Atom folder.
-4. Launch Atom using the installed `atom` command from the newly extracted directory.
-
-The Linux version does not currently automatically update so you will need to
-repeat these steps to upgrade to future releases.
-
-## Building
-
-* [Linux](docs/build-instructions/linux.md)
-* [macOS](docs/build-instructions/macos.md)
-* [FreeBSD](docs/build-instructions/freebsd.md)
-* [Windows](docs/build-instructions/windows.md)
+```bash
+./script/build-transparency;
+```

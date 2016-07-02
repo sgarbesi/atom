@@ -153,4 +153,69 @@
 
   parseLoadSettings()
   setupAtomHome()
+
+  // Grab the avatar for the system user and display it in the workspace.
+  function setupAvatar() {
+  	// If the element already exists, stop the Function.
+  	if (document.getElementsByClassName('titlebar-avatar').length) {
+  		return;
+  	}
+
+  	// Fetch the current system user.
+  	var user = require('process').env.USER;
+
+  	// Fetch the avatar in a base64 format.
+  	require('child_process').exec('dscl . -read /Users/' + user + ' JPEGPhoto | tail -1 | xxd -r -p > /tmp/avatar.jpg; openssl base64 -in /tmp/avatar.jpg; rm -f /tmp/avatar.jpg', function(error, results) {
+  	  // If there's an error, then stop the Function.
+      if (error) {
+        return;
+      }
+
+    	// Adjust the source string to use for the image.
+    	var src = 'data:image/gif;base64,' + results.toString().trim();
+
+    	// Create the image element.
+    	var image = document.createElement('img');
+
+    	// Add the classname.
+    	image.className = 'titlebar-avatar';
+
+    	// Set the source.
+    	image.src = src;
+
+      // Hide the avatar initially.
+      image.style = 'display: none';
+
+    	// Append the image to the body.
+    	document.getElementsByTagName('body')[0].appendChild(image);
+  	});
+  }
+
+  // Handle focus/blur events for the window.
+  function setupFocus() {
+    // Add a class to the `html` element when the window loses focus.
+    window.onblur = function() {
+    	document.getElementsByTagName('html')[0].className = 'blur';
+    };
+
+    // Add a class to the `html` element when the window gains focus.
+    window.onfocus = function() {
+    	document.getElementsByTagName('html')[0].className = 'focus';
+    };
+  }
+
+  // When the title bar is double clicked, minimize the window.
+  function setupTitle() {
+    // Attach the event to the title element.
+    document.querySelector('title').addEventListener('dblclick', function() {
+    	require('electron').remote.getCurrentWindow().minimize();
+    });
+  }
+
+  // Invoke the following procedures after the window has loaded.
+  window.addEventListener('load', function() {
+    setupAvatar()
+    setupFocus()
+    setupTitle()
+  }, false);
 })()

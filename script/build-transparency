@@ -1,0 +1,19 @@
+#!/bin/bash
+#
+# Build the Atom package with a wrapper for the executeable on Mac OS X.
+#
+# @author Salvatore Garbesi <sal@dolox.com>
+# @module script/build-transparency
+#
+
+# Define the root directory of the project.
+ROOT=$(dirname "$0")/..;
+
+# Build the Atom package.
+$ROOT/script/build --install-dir $ROOT/dist/Atom.app;
+
+# Move to compiled binary.
+mv $ROOT/dist/Atom.app/Contents/MacOS/Atom $ROOT/dist/Atom.app/Contents/MacOS/AtomPristine;
+
+# Add the wrapper.
+cp -R $ROOT/script/build-transparency-wrapper $ROOT/dist/Atom.app/Contents/MacOS/Atom;
