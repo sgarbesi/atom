@@ -16,10 +16,12 @@ Add the following CSS to your Atom theme.
 
 Settings > Themes > Your Stylesheet
 
+### Transparency
+
 ```css
 html {
   background: rgba(0, 0, 0, 0.75);
-  padding-top: 28px;
+  padding-top: 35px;
 }
 
 atom-text-editor,
@@ -38,7 +40,7 @@ atom-text-editor::shadow .gutter {
   background-color: rgba(0, 0, 0, 0.25);
   border-right: 1px solid rgba(255, 255, 255, 0.25);
   color: #555;
-  margin-right: 15px;
+  margin-right: 5px;
 
   .line-number {
     opacity: 1 !important;
@@ -62,9 +64,12 @@ title {
   -webkit-user-select: none;
   color: #888;
   display: block;
+  font-size: 12px;
+  height: 35px;
+  padding-top: 10px;
   position: absolute;
   text-align: center;
-  top: 10px;
+  top: 0px;
   width: 100%;
 }
 
@@ -80,5 +85,85 @@ html.focus title {
   right: 5px;
   top: 5px;
   width: 24px;
+}
+```
+
+### TextMate Clone
+
+```css
+atom-pane {
+  border: 0 !important;
+}
+
+.tab-bar {
+  background: #c4c4c4 !important;
+  box-shadow: inset 0 1px 0 0 #b0b0b0;
+  color: #000 !important;
+
+  .tab {
+    border-left: 1px solid #b0b0b0;
+    border-image: none;
+
+    &:first-child {
+      margin-left: -1px;
+    }
+
+    &:last-child {
+      border-right: 1px solid #b0b0b0;
+    }
+
+    &::after {
+      border: 0;
+      border-bottom: 1px solid #262626;
+      box-shadow: none !important;
+    }
+
+    &::before {
+      background: transparent !important;
+    }
+
+    &.active {
+      background-color: #d3d3d3 !important;
+      border-color: #b0b0b0;
+      height: 35px;
+      padding-top: 1px;
+      position: relative;
+      top: -1px;
+
+      &::after {
+        border: 1px solid #b0b0b0 !important;
+        border-top: 0;
+      }
+
+      .title {
+        color: #000;
+        font-weight: 600;
+      }
+    }
+
+    .title {
+      color: #555;
+    }
+
+    .close-icon {
+      color: #000;
+      top: 11px !important;
+    }
+  }
+}
+
+.footer,
+title {
+  background: linear-gradient(to bottom,  rgba(246,246,246,1) 0%,rgba(211,211,211,1) 100%) !important;
+  color: #000 !important;
+}
+
+.titlebar-avatar {
+  right: 10px;
+  top: 6px;
+}
+
+.footer * {
+color: #000 !important;
 }
 ```
