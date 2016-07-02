@@ -2,9 +2,13 @@
 
 This has only been adjusted and tested for Mac OS X.
 
-## Binary
+## Building
 
-Resides in `./dist/Atom.app`.
+```bash
+./script/build-transparency;
+```
+
+The binary will be compiled to `./dist/Atom.app`.
 
 ## Stylesheet
 
@@ -77,10 +81,4 @@ html.focus title {
   top: 5px;
   width: 24px;
 }
-```
-
-## Build
-
-```bash
-./script/build-transparency;
 ```
