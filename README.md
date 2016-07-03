@@ -19,8 +19,9 @@ Settings > Themes > Your Stylesheet
 ### Transparency
 
 ```css
+/* Transparency */
 html {
-  background: rgba(0, 0, 0, 0.75);
+  background: rgba(0, 0, 0, 0.7);
   padding-top: 35px;
 }
 
@@ -90,7 +91,10 @@ html.focus title {
 
 ### TextMate Clone
 
+Make sure to include the transparency CSS with this.
+
 ```css
+/* TextMate Clone */
 atom-pane {
   border: 0 !important;
 }
@@ -152,7 +156,6 @@ atom-pane {
   }
 }
 
-.footer,
 title {
   background: linear-gradient(to bottom,  rgba(246,246,246,1) 0%,rgba(211,211,211,1) 100%) !important;
   color: #000 !important;
@@ -163,7 +166,42 @@ title {
   top: 6px;
 }
 
-.footer * {
-color: #000 !important;
+atom-text-editor::shadow {
+  .indent-guide {
+    box-shadow: none !important;
+  }
+
+  .line-number.foldable .icon-right {
+    color: #fff;
+    visibility: visible;
+  }
+
+  .gutter[gutter-name="linter"] {
+    display: none;
+  }
+}
+
+.horizontal {
+  .left,
+  .vertical atom-pane-container atom-pane {
+    padding: 0 !important;
+  }
+}
+
+html.blur {
+  title {
+    background: #f6f6f6 !important;
+    color: #aaa !important;
+  }
+
+  .tab {
+    .title {
+      color: #888 !important;
+    }
+
+    &.active {
+      background-color: #f6f6f6 !important;
+    }
+  }
 }
 ```
